@@ -42,11 +42,11 @@ class ScoringAndVisualization:
 
 
     def visualize(self):
-        plt.plot(self.cumulative_attention, label='Cumulative Attention')
-        plt.plot(self.cumulative_meditation, label='Cumulative Meditation')
+        plt.plot(self.attention_scores, label='Attention')
+        plt.plot(self.meditation_scores, label='Meditation')
         plt.xlabel('Time (seconds)')
         plt.ylabel('Score')
-        plt.title('Cumulative Attention and Meditation Scores Over Time')
+        plt.title('Attention and Meditation Scores Over Time')
         plt.legend()
         plt.show()
 
@@ -54,7 +54,8 @@ class ScoringAndVisualization:
 
 #initialize the class with a csv file
 if __name__ == "__main__":
-    csv_file = "path/to/your/csvfile.csv"
+    csv_file = "W:\\2_Data\\2-3_Cloud\\OneDrive - National University of Singapore\\AlbertoOldDoc\\documents\\study and learn\\CQU\\ML\\datasets\\classified_huqitianmouth.csv"
     scoring_viz = ScoringAndVisualization(csv_file)
 
 print(scoring_viz.attention_scores)
+scoring_viz.visualize() #plot the attention and meditation scores
