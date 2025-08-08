@@ -41,7 +41,14 @@ class ScoringAndVisualization:
         #since the attention score is measured roughly every seconds, labelling time with score >70 to be effective learning time
 
 
-
+    def visualize(self):
+        plt.plot(self.cumulative_attention, label='Cumulative Attention')
+        plt.plot(self.cumulative_meditation, label='Cumulative Meditation')
+        plt.xlabel('Time (seconds)')
+        plt.ylabel('Score')
+        plt.title('Cumulative Attention and Meditation Scores Over Time')
+        plt.legend()
+        plt.show()
 
 #testing the class
 
