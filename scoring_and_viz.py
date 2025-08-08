@@ -31,6 +31,15 @@ class ScoringAndVisualization:
         self.attention_scores = self.data['attention'].to_numpy()
         self.meditation_scores = self.data['meditation'].to_numpy()
         self.session_duration = len(self.attention_scores)
+        self.average_attention = np.mean(self.attention_scores)
+        self.average_meditation = np.mean(self.meditation_scores)
+        self.cumulative_attention = np.cumsum(self.attention_scores)
+        self.cumulative_meditation = np.cumsum(self.meditation_scores)
+        self.attention_deviation = np.std(self.attention_scores)
+        self.meditation_deviation = np.std(self.meditation_scores)
+        self.effective_learning_time = sum(filter(lambda x: x > 70, self.attention_scores)) #in seconds
+        #since the attention score is measured roughly every seconds, labelling time with score >70 to be effective learning time
+
 
 
 
