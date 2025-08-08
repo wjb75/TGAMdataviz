@@ -28,8 +28,8 @@ import pandas as pd
 class ScoringAndVisualization:
     def __init__(self, csv_file):
         self.data = pd.read_csv(csv_file)
-        self.attention_scores = self.data['attention'].values
-        self.meditation_scores = self.data['meditation'].values
+        self.attention_scores = self.data['attention'].to_numpy()
+        self.meditation_scores = self.data['meditation'].to_numpy()
         self.session_duration = len(self.attention_scores)
 
 
