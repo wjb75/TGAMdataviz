@@ -13,7 +13,7 @@ Some of the metrics that can be useful for reflection include:
 - the standard deviation of the attention and meditation scores.
 - the maximum and minimum attention and meditation scores.
 
-It also visualizes the scores using matplotlib.
+It also visualizes the scores using matplotlib with a user defined threshold.
 
 
 
