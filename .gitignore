@@ -5,4 +5,5 @@
 __pycache__/
 *.pyc
 
-scoring_and_visualize\.spyproject\config
+
+.spyproject/
