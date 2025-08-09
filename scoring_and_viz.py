@@ -29,7 +29,7 @@ import pandas as pd
 
 #read in the csv file
 class ScoringAndVisualization:
-    def __init__(self, csv_file):
+    def __init__(self, csv_file, threshold_for_eff_learning = 70):
         self.data = pd.read_csv(csv_file)
         self.attention_scores = self.data['attention'].to_numpy()
         self.meditation_scores = self.data['meditation'].to_numpy()
@@ -42,6 +42,7 @@ class ScoringAndVisualization:
         self.meditation_deviation = np.std(self.meditation_scores)
         self.effective_learning_time = sum(filter(lambda x: x > 70, self.attention_scores)) #in seconds
         #since the attention score is measured roughly every seconds, labelling time with score >70 to be effective learning time
+        self.threshold_for_eff_learning = threshold_for_eff_learning    
 
 
     def visualize(self):
@@ -52,7 +53,7 @@ class ScoringAndVisualization:
         attention_points = np.array([time, self.attention_scores]).T.reshape(-1, 1, 2)
         attention_segments = np.concatenate([attention_points[:-1], attention_points[1:]], axis = 1)
 
-        attention_colors = ['green' if score > 70 else 'blue' for score in self.attention_scores[:-1]]
+        attention_colors = ['green' if score > self.threshold_for_eff_learning else 'blue' for score in self.attention_scores[:-1]]
 
         meditation_points = np.array([time, self.meditation_scores]).T.reshape(-1, 1, 2)
         meditation_segments = np.concatenate([meditation_points[:-1], meditation_points[1:]], axis=1)  
@@ -88,7 +89,7 @@ if __name__ == "__main__":
     load_dotenv()  # Load environment variables from .env file
     data_dir = os.environ.get('DATA_PATH')
     csv_file = data_dir
-    scoring_viz = ScoringAndVisualization(csv_file)
+    scoring_viz = ScoringAndVisualization(csv_file, 50)
 
 print("The attention scores:")
 print(scoring_viz.attention_scores)
