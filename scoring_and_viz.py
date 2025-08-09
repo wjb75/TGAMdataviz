@@ -20,8 +20,10 @@ It also visualizes the scores using matplotlib.
 '''
 
 # first import the necessary packages
+from dotenv import load_dotenv
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 import pandas as pd
 
 #read in the csv file
@@ -54,8 +56,11 @@ class ScoringAndVisualization:
 
 #initialize the class with a csv file
 if __name__ == "__main__":
-    csv_file = "W:\\2_Data\\2-3_Cloud\\OneDrive - National University of Singapore\\AlbertoOldDoc\\documents\\study and learn\\CQU\\ML\\datasets\\classified_huqitianmouth.csv"
+    load_dotenv()  # Load environment variables from .env file
+    data_dir = os.environ.get('DATA_PATH')
+    csv_file = data_dir
     scoring_viz = ScoringAndVisualization(csv_file)
 
+print("The attention scores:")
 print(scoring_viz.attention_scores)
 scoring_viz.visualize() #plot the attention and meditation scores
