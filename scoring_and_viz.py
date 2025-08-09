@@ -22,6 +22,7 @@ It also visualizes the scores using matplotlib.
 # first import the necessary packages
 from dotenv import load_dotenv
 import matplotlib.pyplot as plt
+from matplotlib.collections import LineCollection   
 import numpy as np
 import os
 import pandas as pd
@@ -44,12 +45,40 @@ class ScoringAndVisualization:
 
 
     def visualize(self):
-        plt.plot(self.attention_scores, label='Attention')
-        plt.plot(self.meditation_scores, label='Meditation')
-        plt.xlabel('Time (seconds)')
-        plt.ylabel('Score')
-        plt.title('Attention and Meditation Scores Over Time')
-        plt.legend()
+        #create a roughly time array
+        time = np.arange(self.session_duration)
+
+        # create segments for attention line
+        attention_points = np.array([time, self.attention_scores]).T.reshape(-1, 1, 2)
+        attention_segments = np.concatenate([attention_points[:-1], attention_points[1:]], axis = 1)
+
+        attention_colors = ['green' if score > 70 else 'blue' for score in self.attention_scores[:-1]]
+
+        meditation_points = np.array([time, self.meditation_scores]).T.reshape(-1, 1, 2)
+        meditation_segments = np.concatenate([meditation_points[:-1], meditation_points[1:]], axis=1)  
+
+        fig, ax  = plt.subplots()
+        
+        # plot attention line with conditional colors
+        attention_lc = LineCollection(attention_segments, colors = attention_colors, linewidths = 2, label = 'Attention')
+        ax.add_collection(attention_lc)
+
+        # Plot meditation line in blue
+        ax.plot(time, self.meditation_scores, 'm-', label='Meditation', linewidth=2)
+
+        # Set plot properties
+        ax.set_xlabel('Time (seconds)')
+        ax.set_ylabel('Score')
+        ax.set_title('Attention and Meditation Scores Over Time')
+    
+        # Set axis limits
+        ax.set_xlim(0, len(self.attention_scores))
+        ax.set_ylim(min(min(self.attention_scores), min(self.meditation_scores)) - 5,
+                    max(max(self.attention_scores), max(self.meditation_scores)) + 5)
+        
+        # Add legend
+        ax.legend()
+        
         plt.show()
 
 #testing the class
