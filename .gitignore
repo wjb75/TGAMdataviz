@@ -1,0 +1,6 @@
+# ignore the .env files that store credentials and environment variables
+.env
+
+# ignore Python cache files
+__pycache__/
+*.pyc
