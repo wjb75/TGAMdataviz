@@ -95,7 +95,7 @@ if __name__ == "__main__":
 print("The attention scores:")
 print(scoring_viz.attention_scores)
 print("The cumulative attention scores:")
-print(scoring_viz.cumulative_attention)
+print(scoring_viz.cumulative_attention[-1])
 print("the effective learning time:")
 print(scoring_viz.effective_learning_time)
 scoring_viz.visualize() #plot the attention and meditation scores
