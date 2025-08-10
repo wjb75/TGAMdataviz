@@ -65,8 +65,8 @@ class ScoringAndVisualization:
         attention_lc = LineCollection(attention_segments, colors = attention_colors, linewidths = 2, label = 'Attention')
         ax.add_collection(attention_lc)
 
-        # Plot meditation line in blue
-        ax.plot(time, self.meditation_scores, 'm-', label='Meditation', linewidth=2)
+        # Plot meditation line 
+        #ax.plot(time, self.meditation_scores, 'm-', label='Meditation', linewidth=2)
 
         # Set plot properties
         ax.set_xlabel('Time (seconds)')
