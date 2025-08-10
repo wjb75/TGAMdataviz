@@ -97,5 +97,6 @@ print(scoring_viz.attention_scores)
 print("The cumulative attention scores:")
 print(scoring_viz.cumulative_attention[-1])
 print("the effective learning time:")
-print(scoring_viz.effective_learning_time)
+print(scoring_viz.effective_learning_time / 60 , end = '')
+print('minutes')
 scoring_viz.visualize() #plot the attention and meditation scores
