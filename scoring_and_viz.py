@@ -31,6 +31,7 @@ import pandas as pd
 class ScoringAndVisualization:
     def __init__(self, csv_file, threshold_for_eff_learning = 70):
         self.data = pd.read_csv(csv_file)
+        self.threshold_for_eff_learning = threshold_for_eff_learning 
         self.attention_scores = self.data['attention'].to_numpy()
         self.meditation_scores = self.data['meditation'].to_numpy()
         self.session_duration = len(self.attention_scores)
@@ -40,9 +41,9 @@ class ScoringAndVisualization:
         self.cumulative_meditation = np.cumsum(self.meditation_scores)
         self.attention_deviation = np.std(self.attention_scores)
         self.meditation_deviation = np.std(self.meditation_scores)
-        self.effective_learning_time = sum(filter(lambda x: x > 70, self.attention_scores)) #in seconds
+        self.effective_learning_time = sum(map(lambda x: x > self.threshold_for_eff_learning, self.attention_scores)) #in seconds
         #since the attention score is measured roughly every seconds, labelling time with score >70 to be effective learning time
-        self.threshold_for_eff_learning = threshold_for_eff_learning    
+           
 
 
     def visualize(self):
@@ -93,4 +94,8 @@ if __name__ == "__main__":
 
 print("The attention scores:")
 print(scoring_viz.attention_scores)
+print("The cumulative attention scores:")
+print(scoring_viz.cumulative_attention)
+print("the effective learning time:")
+print(scoring_viz.effective_learning_time)
 scoring_viz.visualize() #plot the attention and meditation scores
