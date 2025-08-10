@@ -43,8 +43,8 @@ class ScoringAndVisualization:
         self.meditation_deviation = np.std(self.meditation_scores)
         self.effective_learning_time = sum(map(lambda x: x > self.threshold_for_eff_learning, self.attention_scores)) #in seconds
         self.efficiency_percentage = self.effective_learning_time / self.session_duration if self.session_duration > 0 else 0   
-        #since the attention score is measured roughly every seconds, labelling time with score >70 to be effective learning time
-           
+        #since the attention score is measured roughly every seconds, labelling time with score >self.threshold_for_eff_learning to be effective learning time
+
 
 
     def visualize(self):
