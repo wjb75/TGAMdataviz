@@ -93,13 +93,13 @@ if __name__ == "__main__":
     csv_file = data_dir
     scoring_viz = ScoringAndVisualization(csv_file, 50)
 
-print("The attention scores:")
-print(scoring_viz.attention_scores)
-print("The cumulative attention scores:")
-print(scoring_viz.cumulative_attention[-1])
-print("the effective learning time:")
-print(f'{scoring_viz.effective_learning_time / 60 :<.2f}', end=' ')
-print('minutes')
-print('self.efficiency_percentage:')
-print(f'{scoring_viz.efficiency_percentage * 100:<.2f}%')
-scoring_viz.visualize() #plot the attention and meditation scores
+    print("The attention scores:")
+    print(scoring_viz.attention_scores)
+    print("The cumulative attention scores:")
+    print(scoring_viz.cumulative_attention[-1])
+    print("the effective learning time:")
+    print(f'{scoring_viz.effective_learning_time / 60 :<.2f}', end=' ')
+    print('minutes')
+    print('self.efficiency_percentage:')
+    print(f'{scoring_viz.efficiency_percentage * 100:<.2f}%')
+    scoring_viz.visualize() #plot the attention and meditation scores
